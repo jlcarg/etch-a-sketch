@@ -1,6 +1,6 @@
 function drawBoard(numberOfSquares) {
     const drawingBoard = document.querySelector(".drawing-board");
-    const BOARDWIDTH = 960;
+    const BOARDWIDTH = 760;
     let squareDimensions = BOARDWIDTH / numberOfSquares;
     console.log(typeof squareDimensions);
     console.log(squareDimensions);
@@ -13,14 +13,38 @@ function drawBoard(numberOfSquares) {
         drawingBoard.appendChild(newSquare);
     }
 
+    const nodeListSquares = document.querySelectorAll(".square");
+    nodeListSquares.forEach((square) => {
+        square.addEventListener("mouseover", (event) => {
+            event.target.style.backgroundColor = "gray";
+        })
+})
+
+
     return console.log(`A drawing board of ${numberOfSquares} x ${numberOfSquares} squares has been created.`)
 }
 
 drawBoard(35);
 
-const nodeListSquares = document.querySelectorAll(".square");
-nodeListSquares.forEach((square) => {
-    square.addEventListener("mouseover", (event) => {
-        event.target.style.backgroundColor = "gray";
-    })
+const askHowManySquaresToPlayerBtn = document.querySelector('.squares-prompt');
+askHowManySquaresToPlayerBtn.addEventListener("click", () => {
+    const numberOfSquares = +prompt("How many squares per side would you like on the new board? Please write an integer from 1 to 100");
+
+    if (typeof numberOfSquares != 'number' ||
+        numberOfSquares % 2 != 0 ||
+        numberOfSquares <= 0 ||
+        numberOfSquares > 100) {
+            alert("Value not acceptable!\n Please write an integer between 1 and 100");
+            return;
+
+        } else {
+
+            console.log(numberOfSquares);
+            const oldDrawingBoard = document.querySelectorAll('.square');
+            oldDrawingBoard.forEach((square) => {
+                square.remove();
+            })
+            drawBoard(numberOfSquares);
+
+            }
 })
