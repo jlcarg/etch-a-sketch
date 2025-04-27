@@ -12,7 +12,7 @@ The requirements of the project were:
     - Make the color of the pixelated trail be random and change with each interaction
     - Add a progressive darkening effect with each interactions instead of always having the same opacity
 
-[Live Preview]()
+[Live Preview](https://jlcarg.github.io/etch-a-sketch/)
 
 ## Practiced skills
 
