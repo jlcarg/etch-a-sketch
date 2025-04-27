@@ -20,9 +20,7 @@ h1 {
 
 .buttons-container {
     display: flex;
-    /* justify-content: space-around; */
     gap: 50px;
-    /* width: 760px; */
 }
 
 .squares-prompt,
@@ -45,7 +43,6 @@ h1 {
     background-color: gray;
     color: white;
 }
-
 
 .drawing-board {
     display: flex;
