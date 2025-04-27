@@ -16,4 +16,11 @@ function drawBoard(numberOfSquares) {
     return console.log(`A drawing board of ${numberOfSquares} x ${numberOfSquares} squares has been created.`)
 }
 
-drawBoard(16);
+drawBoard(35);
+
+const nodeListSquares = document.querySelectorAll(".square");
+nodeListSquares.forEach((square) => {
+    square.addEventListener("mouseover", (event) => {
+        event.target.style.backgroundColor = "gray";
+    })
+})
