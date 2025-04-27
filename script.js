@@ -34,10 +34,10 @@ function hoverAndColor (style) {
         square.addEventListener("mouseover", (event) => {
 
             switch (style) {
-                case "random":
+                case "color-random":
                 event.target.style.backgroundColor = getRandomRgbColor();
                 break;
-                case "normal":
+                case "color-grey":
                 event.target.style.backgroundColor = "gray";
                 break;
             }
@@ -71,9 +71,46 @@ function deleteOldBoard () {
     return;
 }
 
+function changeColorPaint () {
+
+    const colorBtn = document.querySelector(".painting-choice");
+    const currentColorBoard = document.querySelector(".drawing-board");
+
+    colorBtn.addEventListener("click", (event) => {
+        if (event.target.classList.contains("color-grey")) {
+
+            event.target.classList.remove('color-grey');
+            event.target.classList.add('color-random');
+            currentColorBoard.classList.remove('color-random');
+            currentColorBoard.classList.add('color-grey');
+
+            event.target.textContent = "Change to Random Colors";
+            deleteOldBoard();
+            drawBoard(15, "color-grey");
+
+            return;
+
+        } else {
+
+            event.target.classList.remove('color-random');
+            event.target.classList.add('color-grey');
+            currentColorBoard.classList.remove('color-grey');
+            currentColorBoard.classList.add('color-random');
+
+            event.target.textContent = "Change to Grey Color";
+            deleteOldBoard();
+            drawBoard(15, "color-random");
+
+            return;
+        }
+    })
+
+}
+
 const askHowManySquaresToPlayerBtn = document.querySelector('.squares-prompt');
 askHowManySquaresToPlayerBtn.addEventListener("click", () => {
     const numberOfSquares = +prompt("How many squares per side would you like on the new board? Please write an integer from 1 to 100");
+    const styleOfNewBoard = document.querySelector(".drawing-board").classList[1];
 
     if (typeof numberOfSquares != 'number' ||
         !Number.isInteger(numberOfSquares) ||
@@ -87,10 +124,11 @@ askHowManySquaresToPlayerBtn.addEventListener("click", () => {
         } else {
 
             deleteOldBoard();
-            drawBoard(numberOfSquares, "normal");
+            drawBoard(numberOfSquares, styleOfNewBoard);
             
             return;
             }
 })
 
-drawBoard(15, "random");
+changeColorPaint();
+drawBoard(15, "color-random");
