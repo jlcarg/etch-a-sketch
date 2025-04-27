@@ -27,6 +27,7 @@ h1 {
     padding: 7px;
     margin-bottom: 20px;
     margin-top: 35px;
+    text-transform: uppercase;
 }
 
 .drawing-board {
@@ -37,9 +38,6 @@ h1 {
 }
 
 .square {
-    /* width: 10px;
-    height: 10px; */
-    /* border: 1px solid rgb(133, 133, 133); */
-    background-color: whitesmoke;
+    opacity: 0.1;
 }
 

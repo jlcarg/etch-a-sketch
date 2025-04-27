@@ -5,6 +5,17 @@ function getRandomRgbColor() {
     return `rgb(${r}, ${g}, ${b})`;
   }
 
+function addOpacity() {
+    const nodeListSquares = document.querySelectorAll(".square");
+    nodeListSquares.forEach((square) => {
+        square.addEventListener("mouseover", (event) => {
+
+            event.target.style.opacity = +event.target.style.opacity + 0.1;
+
+        })
+})
+}
+
 function hoverAndColor (style) {
     const nodeListSquares = document.querySelectorAll(".square");
     nodeListSquares.forEach((square) => {
@@ -38,11 +49,10 @@ function drawBoard(numberOfSquares) {
     }
 
     hoverAndColor("random");
+    addOpacity();
 
     return console.log(`A drawing board of ${numberOfSquares} x ${numberOfSquares} squares has been created.`)
 }
-
-drawBoard(35);
 
 const askHowManySquaresToPlayerBtn = document.querySelector('.squares-prompt');
 askHowManySquaresToPlayerBtn.addEventListener("click", () => {
@@ -62,7 +72,10 @@ askHowManySquaresToPlayerBtn.addEventListener("click", () => {
             oldDrawingBoard.forEach((square) => {
                 square.remove();
             })
+
             drawBoard(numberOfSquares);
 
             }
 })
+
+drawBoard(35);
