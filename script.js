@@ -1,22 +1,34 @@
 function getRandomRgbColor() {
+
     const r = Math.floor(Math.random() * 256);
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
+
     return `rgb(${r}, ${g}, ${b})`;
-  }
+}
 
-function addOpacity() {
-    const nodeListSquares = document.querySelectorAll(".square");
-    nodeListSquares.forEach((square) => {
-        square.addEventListener("mouseover", (event) => {
+function drawBoard(numberOfSquares, style) {
 
-            event.target.style.opacity = +event.target.style.opacity + 0.1;
-
-        })
-})
+    const drawingBoard = document.querySelector(".drawing-board");
+    const BOARDWIDTH = 760;
+    let squareDimensions = BOARDWIDTH / numberOfSquares;
+    
+    for (i = 0; i < numberOfSquares * numberOfSquares; i++) {
+        const newSquare = document.createElement("div");
+        newSquare.setAttribute("class", "square");
+        newSquare.style.width = squareDimensions + 'px';
+        newSquare.style.height = squareDimensions + 'px';
+        drawingBoard.appendChild(newSquare);
+    }
+    
+    hoverAndColor(style);
+    addOpacity();
+    
+    return console.log(`A drawing board of ${numberOfSquares} x ${numberOfSquares} squares has been created.`)
 }
 
 function hoverAndColor (style) {
+
     const nodeListSquares = document.querySelectorAll(".square");
     nodeListSquares.forEach((square) => {
         square.addEventListener("mouseover", (event) => {
@@ -30,28 +42,33 @@ function hoverAndColor (style) {
                 break;
             }
         })
-})
+    })
+
+    return;
 }
 
-function drawBoard(numberOfSquares) {
-    const drawingBoard = document.querySelector(".drawing-board");
-    const BOARDWIDTH = 760;
-    let squareDimensions = BOARDWIDTH / numberOfSquares;
-    console.log(typeof squareDimensions);
-    console.log(squareDimensions);
+function addOpacity() {
 
-    for (i = 0; i < numberOfSquares * numberOfSquares; i++) {
-        const newSquare = document.createElement("div");
-        newSquare.setAttribute("class", "square");
-        newSquare.style.width = squareDimensions + 'px';
-        newSquare.style.height = squareDimensions + 'px';
-        drawingBoard.appendChild(newSquare);
-    }
+    const nodeListSquares = document.querySelectorAll(".square");
+    nodeListSquares.forEach((square) => {
+        square.addEventListener("mouseover", (event) => {
 
-    hoverAndColor("random");
-    addOpacity();
+            event.target.style.opacity = +event.target.style.opacity + 0.1;
 
-    return console.log(`A drawing board of ${numberOfSquares} x ${numberOfSquares} squares has been created.`)
+        })
+    })
+
+    return;
+}
+
+function deleteOldBoard () {
+
+    const oldDrawingBoard = document.querySelectorAll('.square');
+    oldDrawingBoard.forEach((square) => {
+        square.remove();
+    })
+
+    return;
 }
 
 const askHowManySquaresToPlayerBtn = document.querySelector('.squares-prompt');
@@ -62,20 +79,18 @@ askHowManySquaresToPlayerBtn.addEventListener("click", () => {
         !Number.isInteger(numberOfSquares) ||
         numberOfSquares <= 0 ||
         numberOfSquares > 100) {
+
             alert("Value not acceptable!\n Please write an integer between 1 and 100");
+
             return;
 
         } else {
 
-            console.log(numberOfSquares);
-            const oldDrawingBoard = document.querySelectorAll('.square');
-            oldDrawingBoard.forEach((square) => {
-                square.remove();
-            })
-
-            drawBoard(numberOfSquares);
-
+            deleteOldBoard();
+            drawBoard(numberOfSquares, "normal");
+            
+            return;
             }
 })
 
-drawBoard(35);
+drawBoard(15, "random");
